@@ -1,0 +1,8 @@
+app:
+  name: Monit
+  port: :8090
+
+database:
+  dsn: "root:password@tcp(localhost:3306)/monit?charset=utf8mb4&parseTime=True&loc=Local"
+  maxIdleConns: 5
+  maxOpenCons: 3
