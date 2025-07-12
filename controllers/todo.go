@@ -11,7 +11,7 @@ import (
 
 func Fetch(ctx *gin.Context) {
 	var todos []models.Todo
-	if result := global.Db.Where("deleted = ?", false).Order("`order` DESC").Find(&todos); result.Error != nil {
+	if result := global.Db.Where("deleted = ?", false).Order("`order` ASC").Find(&todos); result.Error != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": result.Error.Error(),
 		})
