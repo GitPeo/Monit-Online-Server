@@ -34,8 +34,6 @@ func Update(ctx *gin.Context) {
 		})
 		return
 	}
-	fmt.Println("todoReqs: ")
-	fmt.Println(todoReqs)
 	// 调用 update 函数更新数据库中的记录
 	if err := update(todoReqs); err != nil {
 		// 若更新过程中出现错误，返回 400 状态码和错误信息
@@ -63,9 +61,6 @@ func update(todos []models.TodoReq) error {
 	for i := range allTodos {
 		collect[allTodos[i].Tid] = &allTodos[i]
 	}
-	fmt.Println("collect: ")
-	fmt.Println(collect)
-
 	var newTodos []models.Todo
 	var updateTodos []models.Todo
 
@@ -93,7 +88,8 @@ func update(todos []models.TodoReq) error {
 	// 批量更新现有的 Todo 记录
 	fmt.Println("updateTodos: ")
 	for _, item := range updateTodos {
-		global.Db.Model(&item).Where("id = ?", item.Id).Updates(item)
+		fmt.Println(item)
+		global.Db.Model(&item).Select("*").Updates(item)
 	}
 
 	return nil
